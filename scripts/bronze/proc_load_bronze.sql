@@ -39,13 +39,16 @@ BEGIN
 		BULK INSERT bronze.artist
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\artist.csv'
 		WITH (
+		    FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 		PRINT '>> -------------';
+
 
         SET @start_time = GETDATE();
 		PRINT '>> Truncating Table: bronze.canvas_size';
@@ -55,13 +58,16 @@ BEGIN
 		BULK INSERT bronze.canvas_size
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\canvas_size.csv'
 		WITH (
+		    FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 		PRINT '>> -------------';
+
 
         SET @start_time = GETDATE();
 		PRINT '>> Truncating Table: bronze.image_link';
@@ -70,8 +76,10 @@ BEGIN
 		BULK INSERT bronze.image_link
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\image_link.csv'
 		WITH (
+		    FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
@@ -86,13 +94,16 @@ BEGIN
 		BULK INSERT bronze.museum
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\museum.csv'
 		WITH (
+			FORMAT = 'CSV',
 			FIRSTROW = 2,
-			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
+
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 		PRINT '>> -------------';
+
 
 		SET @start_time = GETDATE();
 		PRINT '>> Truncating Table: bronze.museum_hours';
@@ -101,13 +112,16 @@ BEGIN
 		BULK INSERT bronze.museum_hours
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\museum_hours.csv'
 		WITH (
+		    FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 		PRINT '>> -------------';
+
 
 		SET @start_time = GETDATE();
 		PRINT '>> Truncating Table: bronze.product_size';
@@ -116,8 +130,10 @@ BEGIN
 		BULK INSERT bronze.product_size
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\product_size.csv'
 		WITH (
+		    FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
@@ -132,8 +148,10 @@ BEGIN
 		BULK INSERT bronze.[subject]
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\subject.csv'
 		WITH (
+		    FORMAT = 'CSV',
 			FIRSTROW = 2,
 			FIELDTERMINATOR = ',',
+			CODEPAGE = '65001',
 			TABLOCK
 		);
 		SET @end_time = GETDATE();
@@ -148,12 +166,12 @@ BEGIN
 		BULK INSERT bronze.work
 		FROM 'C:\Users\do199\Documents\SQL\Datasets\painting\work.csv'
 		WITH (
-		FIRSTROW = 2,
-		FIELDTERMINATOR = ',',
-		ROWTERMINATOR = '\n',
-		CODEPAGE = '65001',
-		FORMAT = 'CSV',
-		TABLOCK
+			FIRSTROW = 2,
+			FIELDTERMINATOR = ',',
+			ROWTERMINATOR = '\n',
+			CODEPAGE = '65001',
+			FORMAT = 'CSV',
+			TABLOCK
 		);
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
@@ -173,6 +191,7 @@ BEGIN
 		PRINT 'Error Message: ' + ERROR_MESSAGE();
 		PRINT 'Error Number: ' + CAST(ERROR_NUMBER() AS NVARCHAR);
 		PRINT 'Error State: ' + CAST(ERROR_STATE() AS NVARCHAR);
-		PRINT '=========================================='
+		PRINT '==========================================';
+		THROW;
 	END CATCH
 END
