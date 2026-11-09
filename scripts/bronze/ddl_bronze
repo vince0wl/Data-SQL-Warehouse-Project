@@ -1,0 +1,122 @@
+/*
+===============================================================================
+DDL Script: Create Bronze Tables
+===============================================================================
+This script creates tables in the 'bronze' schema, dropping existing tables if they already exist.
+Run this script to re-define the DDL structure of 'bronze' Tables
+===============================================================================
+*/
+
+USE master;
+GO
+
+USE DataWarehouse;
+GO
+
+IF OBJECT_ID('bronze.artist', 'U') IS NOT NULL
+    DROP TABLE bronze.artist;
+GO
+
+CREATE TABLE bronze.artist (
+    artist_id              INT,
+    full_name              NVARCHAR(50),
+    first_name             NVARCHAR(50),
+    middle_names           NVARCHAR(50),
+    last_name              NVARCHAR(50),
+    nationality            NVARCHAR(50),
+    style                  NVARCHAR(50),
+    birth                  INT,
+    death                  INT
+);
+GO
+
+
+IF OBJECT_ID('bronze.canvas_size', 'U') IS NOT NULL
+    DROP TABLE bronze.canvas_size;
+GO
+
+CREATE TABLE bronze.canvas_size (
+    size_id       INT,
+    width         INT,
+    height        INT,
+    label         NVARCHAR(500)
+);
+GO
+
+IF OBJECT_ID('bronze.image_link', 'U') IS NOT NULL
+    DROP TABLE bronze.image_link;
+GO
+
+CREATE TABLE bronze.image_link (
+    work_id              INT,
+    url                  NVARCHAR(MAX),
+    thumbnail_small_url  NVARCHAR(MAX),
+    thumbnail_large_url  NVARCHAR(MAX)
+);
+GO
+
+IF OBJECT_ID('bronze.museum', 'U') IS NOT NULL
+    DROP TABLE bronze.museum;
+GO
+
+CREATE TABLE bronze.museum (
+    museum_id     INT,
+    [name]        NVARCHAR(500),
+    [address]     NVARCHAR(50),
+    city          NVARCHAR(50),
+    [state]       NVARCHAR(50),
+    postal        NVARCHAR(50),
+    country       NVARCHAR(50),
+    phone         NVARCHAR(20),
+    [url]         NVARCHAR(MAX)
+);
+GO
+
+IF OBJECT_ID('bronze.museum_hours', 'U') IS NOT NULL
+    DROP TABLE bronze.museum_hours;
+GO
+
+CREATE TABLE bronze.museum_hours (
+    museum_id     INT,
+    [day]         NVARCHAR(50),
+    [open]        NVARCHAR(50),
+    [close]       NVARCHAR(50)
+);
+GO
+
+
+IF OBJECT_ID('bronze.product_size', 'U') IS NOT NULL
+    DROP TABLE bronze.product_size;
+GO
+
+CREATE TABLE bronze.product_size (
+    work_id           INT,
+    size_id           NVARCHAR(50),
+    sale_price        NVARCHAR(50),
+    regular_price     NVARCHAR(50)
+);
+GO
+
+
+IF OBJECT_ID('bronze.[subject]', 'U') IS NOT NULL
+    DROP TABLE bronze.[subject];
+GO
+
+CREATE TABLE bronze.[subject] (
+    work_id        INT,
+    [subject]      NVARCHAR(50)
+);
+GO
+
+IF OBJECT_ID('bronze.work', 'U') IS NOT NULL
+    DROP TABLE bronze.work;
+GO
+
+CREATE TABLE bronze.work (
+    work_id           INT,
+    [name]            NVARCHAR(500),
+    artist_id         INT,
+    style             NVARCHAR(500),
+    museum_id         NVARCHAR(50)
+);
+GO
